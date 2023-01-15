@@ -4,7 +4,6 @@ const SHOW_ADDRESSBOOK = '1';
 const ADD_CONTACT = '2';
 const EDIT_CONTACT = '3';
 const DELETE_CONTACT = '4';
-
 const EXIT = '0';
 const CONTINUE = '1';
 const RETURN_TO_MAIN = '2';
@@ -25,7 +24,7 @@ addressbook.push(c1);
 addressbook.push(c2);
 
 while (true) {
-    console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact")
+    console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact\n4. Delete Contact")
     var number = prompt("Enter your choice : ")
     switch (number) {
         case SHOW_ADDRESSBOOK: showAddressbook();
@@ -34,9 +33,25 @@ while (true) {
             break;
         case EDIT_CONTACT: editContact();
             break;
+        case DELETE_CONTACT: deleteContact();
+            break;
         case EXIT: return false;
         default: console.log("invalid input...")
     }
+}
+
+function deleteContact() {
+    var fname = prompt("Enter First Name : ");
+    addressbook.filter(contact => {
+        if (contact.firstName == fname) {
+            let index = addressbook.indexOf(contact)
+            addressbook.splice(index, 1);
+            console.log("delete...")
+        }
+        else {
+            console.log("contact not found")
+        }
+    })
 }
 
 function editContact() {
