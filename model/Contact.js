@@ -91,6 +91,7 @@ class Contact {
         console.log("Zip : " + contact.getZip());
         console.log("Phone Number : " + contact.getPhoneNumber());
         console.log("Email id : " + contact.getEmail());
+        console.log("-----------------------------------\n")
     }
 }
 module.exports.Contact = Contact;
