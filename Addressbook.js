@@ -4,6 +4,7 @@ const SHOW_ADDRESSBOOK = '1';
 const ADD_CONTACT = '2';
 const EDIT_CONTACT = '3';
 const DELETE_CONTACT = '4';
+const COUNT_CONTACT = '5';
 const EXIT = '0';
 const CONTINUE = '1';
 const RETURN_TO_MAIN = '2';
@@ -24,7 +25,8 @@ addressbook.push(c1);
 addressbook.push(c2);
 
 while (true) {
-    console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact\n4. Delete Contact")
+    console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact\n4. Delete Contact\n5. Count Contact");
+    console.log();
     var number = prompt("Enter your choice : ")
     switch (number) {
         case SHOW_ADDRESSBOOK: showAddressbook();
@@ -35,9 +37,18 @@ while (true) {
             break;
         case DELETE_CONTACT: deleteContact();
             break;
+        case COUNT_CONTACT: countContact();
+            break;
         case EXIT: return false;
         default: console.log("invalid input...")
     }
+}
+
+
+function countContact() {
+    let count = 0;
+    addressbook.forEach(contact => { count++ });
+    console.log("contact present in addressbook :" + count);
 }
 
 function deleteContact() {
@@ -139,19 +150,16 @@ function addContact() {
         switch (number) {
             case CONTINUE:
                 var contact = createContact();
-                addressbook.push(contact);
+                addressbook.push(contact);  
                 break;
             case RETURN_TO_MAIN: return;
             default: console.log("invalid input..")
         }
     }
-
 }
 
 function showAddressbook() {
-    for (let index = 0; index < addressbook.length; index++) {
-        contact.printContact(addressbook[index]);
-    }
+    addressbook.forEach(contact => contact.printContact(contact));
 }
 
 function createContact() {
