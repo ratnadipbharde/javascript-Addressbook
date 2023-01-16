@@ -150,12 +150,24 @@ function addContact() {
         switch (number) {
             case CONTINUE:
                 var contact = createContact();
-                addressbook.push(contact);  
+                if (!isExist(contact.firstName)) {
+                    addressbook.push(contact);
+                }
+                console.log("\ncontact already exist...\n")
                 break;
             case RETURN_TO_MAIN: return;
             default: console.log("invalid input..")
         }
     }
+}
+
+function isExist(name) {
+    addressbook.filter(contact => {
+        if (contact.firstName == name) { 
+            return true; 
+        }   
+    })
+    return false;
 }
 
 function showAddressbook() {
