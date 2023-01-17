@@ -44,7 +44,6 @@ while (true) {
     }
 }
 
-
 function countContact() {
     let count = 0;
     addressbook.forEach(contact => { count++ });
@@ -163,9 +162,9 @@ function addContact() {
 
 function isExist(name) {
     addressbook.filter(contact => {
-        if (contact.firstName == name) { 
-            return true; 
-        }   
+        if (contact.firstName == name) {
+            return true;
+        }
     })
     return false;
 }
