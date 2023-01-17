@@ -5,6 +5,7 @@ const ADD_CONTACT = '2';
 const EDIT_CONTACT = '3';
 const DELETE_CONTACT = '4';
 const COUNT_CONTACT = '5';
+const SEARCH_PERSON_BY_CITY_OR_STATE = '6'
 const EXIT = '0';
 const CONTINUE = '1';
 const RETURN_TO_MAIN = '2';
@@ -21,11 +22,14 @@ var contact = new Contact();
 let addressbook = new Array();
 var c1 = new Contact("Ratnadip", "Bharde", "amravati", "Amravati", "Maharashtra", "444606", "8983253934", "ratnadipbharde@gmail.com")
 var c2 = new Contact("Prashik", "Kamble", "akola", "Akola", "Maharashtra", "444001", "8806187589", "prashikkamble@gmail.com")
+var c2 = new Contact("Mazar", "Ali", "haidrabaad", "Hydrabad", "Telangana", "500001", "8956478561", "mazarali@gmail.com")
+
 addressbook.push(c1);
 addressbook.push(c2);
+viewContactByCityOrState();
 
 while (true) {
-    console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact\n4. Delete Contact\n5. Count Contact");
+    console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact\n4. Delete Contact\n5. Count Contact\n6. Search contact By city or state.");
     console.log();
     var number = prompt("Enter your choice : ")
     switch (number) {
@@ -39,8 +43,42 @@ while (true) {
             break;
         case COUNT_CONTACT: countContact();
             break;
+        case SEARCH_PERSON_BY_CITY_OR_STATE: searchContactByCityOrState();
+            break;
         case EXIT: return false;
         default: console.log("invalid input...")
+    }
+}
+
+function searchContactByCityOrState() {
+    console.log("1. search By City.\n2. Search by State\n")
+    var userInput = prompt("Enter your choice : ")
+    let flag = false;
+    switch (userInput) {
+        case '1':
+            var cityName = prompt("Enter name of City : ")
+            addressbook.filter(contact => {
+                if (contact.city.toLowerCase() == cityName.toLowerCase()) {
+                    contact.printContact(contact);
+                    flag = true;
+                }
+            })
+            break;
+        case '2':
+            var stateName = prompt("Enter Name of State : ")
+            addressbook.filter(contact => {
+                if (contact.state.toLowerCase() == stateName.toLowerCase()) {
+                    contact.printContact(contact);
+                    flag = true;
+                }
+            })
+            break;
+
+        default: console.log("Invalid Input...");
+            break;
+    }
+    if (!flag) {
+        console.log("data not found...")
     }
 }
 
