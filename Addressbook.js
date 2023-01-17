@@ -5,7 +5,8 @@ const ADD_CONTACT = '2';
 const EDIT_CONTACT = '3';
 const DELETE_CONTACT = '4';
 const COUNT_CONTACT = '5';
-const SEARCH_PERSON_BY_CITY_OR_STATE = '6'
+const SEARCH_PERSON_BY_CITY_OR_STATE = '6';
+const SORT_CONTACT_BY_NAME = '9';
 const EXIT = '0';
 const CONTINUE = '1';
 const RETURN_TO_MAIN = '2';
@@ -22,15 +23,17 @@ var contact = new Contact();
 let addressbook = new Array();
 var c1 = new Contact("Ratnadip", "Bharde", "amravati", "Amravati", "Maharashtra", "444606", "8983253934", "ratnadipbharde@gmail.com")
 var c2 = new Contact("Prashik", "Kamble", "akola", "Akola", "Maharashtra", "444001", "8806187589", "prashikkamble@gmail.com")
-var c2 = new Contact("Mazar", "Ali", "haidrabaad", "Hydrabad", "Telangana", "500001", "8956478561", "mazarali@gmail.com")
+var c3 = new Contact("Mazar", "Ali", "haidrabaad", "Hydrabad", "Telangana", "500001", "8956478561", "mazarali@gmail.com")
+var c4 = new Contact("Priyanka", "Ahinde", "Pune", "Pune", "Maharashtra", "555604", "6584759625", "prinkashinde@gmail.com")
 
 addressbook.push(c1);
 addressbook.push(c2);
-viewContactByCityOrState();
+addressbook.push(c3);
+addressbook.push(c4);
 
 while (true) {
     console.log("\n\n0. Exit\n1. show Addressbook\n2. Add Contact\n3. Edit Contact\n4. Delete Contact\n5. Count Contact\n6. Search contact By city or state.");
-    console.log();
+    console.log("9. sort contact by name\n");
     var number = prompt("Enter your choice : ")
     switch (number) {
         case SHOW_ADDRESSBOOK: showAddressbook();
@@ -45,9 +48,16 @@ while (true) {
             break;
         case SEARCH_PERSON_BY_CITY_OR_STATE: searchContactByCityOrState();
             break;
+        case SORT_CONTACT_BY_NAME: sortContactByName();
+            break;
         case EXIT: return false;
         default: console.log("invalid input...")
     }
+}
+
+function sortContactByName() {
+    addressbook.sort((a, b) => a.firstName > b.firstName ? 1 : -1);
+    console.table(addressbook);
 }
 
 function searchContactByCityOrState() {
